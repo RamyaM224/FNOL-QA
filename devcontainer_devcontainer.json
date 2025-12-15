@@ -1,0 +1,24 @@
+{
+  "name": "fnol-codespace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "forwardPorts": [3000, 8080, 9229],
+  "postCreateCommand": "scripts/bootstrap.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ritwickdey.LiveServer",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      }
+    }
+  },
+  "remoteUser": "vscode"
+}
