@@ -1,136 +1,65 @@
-# Phoenix Submission Workflow
- 
-## Initial Setup & Submission Creation
- 
-### 1. Create Submission in UWD
-- Create a submission in UWD
-- Initiate the submission to Phoenix
-- Purge the submission to Phoenix environment
- 
-### 2. Verify Policy Information Screen
-Click on Transaction and verify the details mapped correctly from UWD to PC in policy info screen:
-- Address Type
-- Address Description
-- Policy Currency
-- EDB Submission
-- SIC Code
-- Broker Details
-- Product
-- Organization Details
-- Broker Contact Details
-- Effective Date
-- Date Quote Needed
- 
----
- 
-## Line Selection & Product Configuration
- 
-### 3. Line Selection Screen
-- Navigate to line selection screen
-- Verify the product details
-- User can add/delete products
-- **Scope-based Fac Indicator Selection:**
-  - If **Domestic scope**: Select the fac indicator
-  - If **Produced**: Default to Reinsurance
- 
----
- 
-## Lines of Business (LOB) Configuration
- 
-### 4. Property Screen
-- Navigate to Property screen
-- Fill all mandatory fields
-- **Validate integrations in location screen:**
-  - Geocode
-  - OPTA
-  - Risk Predictive Analysis
-  - CCL
-  - Marginal Impact
- 
-### 5. Inland Marine LOB
-- Navigate to Inland Marine LOB
-- Fill all mandatory fields
- 
+# FNOL claim submission workflow
+## Initial Setup of sending email
+### 1. Email setup
+- Send an email from CAZ_Claims_UAT_FNOL <caz.claims.uat.fnol@zurich.com>
+- Verify in COSMOS DB to check for the work item 
+- Validate all fields like email subject,date and time ,policy no ,date of loss
+
+### 2. Creation of work item in FNOL portal
+Verify if work item is created in FNOL portal
+- Person who sent email
+- Urgent flag
+- Asterisk
+- Work item id
+- Subject
+- Date and time
+- Policy no
+- Date of loss
+## Work item case status To do and assignee as "Unassigned"
+### 3. Case status as "To do" 
+- Verify the work item id for the email extracted 
+- Validate the work item status and check the assignee of Work item id
+- Work item id status will be "To do" and will be in Unassigned state
+
+### 4. Validation of "Start a Claim" button and Assign to me dropdown
+- Select the extracted work item id for the email sent
+- Assign the work item id to yourself or others
+- Select the work item id and click on start a claim button
+### 5. Validation of Policy search screen in FNOL portal
+- Verify the extracted email preview for the email sent
+- Verify if policy number ,loss date and attachments are extracted from email in policy search screen.
+- Verify if user is able to download attachment from the extracted email in the extracted work item. 
 ### 6. General Liability LOB
-- Navigate to General Liability LOB
-- Fill all mandatory fields
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a General Liability policy 
+### 7. Property LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Property policy
+### 8. Financial Lines LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Financial Lines policy
  
-### 7. Umbrella LOB
-- Navigate to Umbrella LOB
-- Fill all mandatory fields
+### 9. Inland Marine LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Inland marine policy
  
-### 8. Financial Lines
-- Navigate to Financial Lines
-- Add the products
-- Fill all mandatory fields
+### 10. Umbrella LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Umbrella policy
  
----
+### 11. Contigent Lessor LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Contigent Lessor  policy
  
-## Pricing & Approval
+### 12. Excess auto LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Excess Auto  policy
  
-### 9. Price the Submission
-- After entering all mandatory fields, click Price
-- Approve Underwriter rules
  
-### 10. Update Quoted Premium
-- Navigate to update screen
-- Update the Quoted Premium
-- Add IPS contract ID & program ID
- 
-### 11. Audit Screen
-- Navigate to Audit screen
-- Select Yes/No for GL and IM
- 
----
- 
-## Quote Process
- 
-### 12. Generate Quote
-- Click on Quote
-- Validate the Quote Document
- 
----
- 
-## Binding Process
- 
-### 13. Update Actual Premium
-- Navigate back to update screen
-- Update the Actual Premium
- 
-### 14. Bind the Policy
-- Click on Bind
-- Validate the Binder Document
- 
----
- 
-## Policy Issuance
- 
-### 15. Issue Policy
-- Click on policy and navigate to policy summary screen
-- Click on Issue policy
- 
-### 16. Price Issuance Submission
-- Click on Price button of issuance submission
- 
-### 17. Issue the Policy
-- Click on Issue the policy of issuance submission
-- Validate Froms in the Forms screen
-- Validate Dec Document
- 
----
- 
-## Scope & Transaction Coverage
- 
-### **Scope To Be Covered:**
-- Domestic
-- Produced
- 
-### **Transactions To Be Covered:**
-- New Business
-- Policy Change
-- Policy Change OOS
-- Cancel
-- Reinstate
-- Rewrite
-- Rewrite OOS
-- Renewal
