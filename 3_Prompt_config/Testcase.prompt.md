@@ -8,15 +8,15 @@ description: Generate detailed manual test cases in CSV format for the given use
 ## Input Requirements
  
 **User Story File Path:** Prompt user to provide the file path at runtime
-- Example: `C:\Users\LAVANYA.CHITTAJALLU\copilot\OptimusCore\1_Base_Repo\User_Story\{filename}.md`
+- Example: `/workspaces/FNOL-QA/1_Base_Repo/User_Story/US_001.md`
 
 - The prompt will ask: "Please provide the User Story file path:"
  
-**Template Reference:** `C:\Users\LAVANYA.CHITTAJALLU\copilot\OptimusCore\1_Base_Repo\Template\Template.md`
+**Template Reference:** `/workspaces/FNOL-QA/1_Base_Repo/Template/Template.md`
 
-**Navigation Steps Reference:** `C:\Users\LAVANYA.CHITTAJALLU\copilot\OptimusCore\1_Base_Repo\Reference\navigation_steps.md`
+**Navigation Steps Reference:** `/workspaces/FNOL-QA/1_Base_Repo/Reference/navigation_steps.md`
 
-**Output Location:** `C:\Users\LAVANYA.CHITTAJALLU\copilot\OptimusCore\4_Design_Studio\{filename}_TestCases.csv`
+**Output Location:** `/workspaces/FNOL-QA/4_Design_Studio/CCI-101 Output.csv`
 
 - The prompt will ask: "Please provide the Output Location file path:"
 
@@ -246,4 +246,5 @@ When ready to generate test cases, the system will:
 4. Save as CSV in the specified location
 5. Display confirmation with file path and test case count
  
+
 ---
