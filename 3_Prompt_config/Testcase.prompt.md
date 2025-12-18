@@ -1,3 +1,4 @@
+
 ---
 agent: 'agent'
 description: Generate detailed manual test cases in CSV format for the given user story and acceptance criteria.
@@ -8,15 +9,15 @@ description: Generate detailed manual test cases in CSV format for the given use
 ## Input Requirements
  
 **User Story File Path:** Prompt user to provide the file path at runtime
-- Example: `/workspaces/FNOL-QA/1_Base_Repo/User_Story/US_001.md`
+- Example: `/workspaces/FNOL-/1_Base_repo/Userstory/CAMS-1863.md'
 
 - The prompt will ask: "Please provide the User Story file path:"
  
-**Template Reference:** `/workspaces/FNOL-QA/1_Base_Repo/Template/Template.md`
+**Template Reference:** `/workspaces/FNOL-/1_Base_repo/Template/Template.md'
 
-**Navigation Steps Reference:** `/workspaces/FNOL-QA/1_Base_Repo/Reference/navigation_steps.md`
+**Navigation Steps Reference:** `/workspaces/FNOL-/1_Base_repo/Reference/navigation_steps.md`
 
-**Output Location:** `/workspaces/FNOL-QA/4_Design_Studio/CCI-101 Output.csv`
+**Output Location:** `/workspaces/FNOL-/4_Design_Studio/CCI-101_Output.csv`
 
 - The prompt will ask: "Please provide the Output Location file path:"
 
@@ -33,13 +34,13 @@ Generate manual test cases in CSV format based on the user story provided in the
  
 ### 1. Read Input Files
 - Prompt the user to enter the User Story file path
-- Read the user story and acceptance criteria from the provided file path
+- Read the user story from the provided file path
 - Read the template structure from `Template.md`
 - Read any reference documents for application flow and navigation steps from `navigation_steps.md`
  
 ### 2. Analyze User Story
 - Identify all distinct scenarios within the user story **ONLY**
-- Do not create additional scenarios beyond what is explicitly defined in the user story acceptance criteria
+- Do not create additional scenarios beyond what is explicitly defined in the user story 
 - Extract scenario-specific details:
   - Scenario title/name
   - Acceptance criteria
@@ -49,73 +50,162 @@ Generate manual test cases in CSV format based on the user story provided in the
  
 ### 3. Generate Test Cases
  
-For each scenario **explicitly mentioned in the user story**, generate **exactly one** test case with multiple rows (one row per action-expected result pair):
+**For each scenario give me testcases positive and negative with clear steps with test case name,test case description, expected result and status **
+
  
-#### Multi-Row Structure
- 
-**First Row (Complete Test Case Information):**
+ **Complete Test Case Information**
 - TC ID: Sequential number
 - Test Type: Manual
 - Test Case Name: Full descriptive name following format
-- Description: Complete objective of the test case
-- Action: First action step (numbered as "1. ")
+- Test case Description: Complete objective of the test case
+- Test steps: First  step (numbered as "1. ")
 - Expected Result: First expected result (numbered as "1. ")
-- Test Repository Path: Full path to test repository
-- Status: Done / In Progress / Not Started
+- Status: Done ,In Progress ,Not Started
 - Components: Middle Market
-- User Story: User Story ID
+- User Story: CCI-101
 - Priority: High / Medium / Low
-- Scenario Type: Positive / Negative
+- Scenario Type: Positive and Negative
  
-**Subsequent Rows (Same Test Case - Additional Steps):**
-- TC ID: Same as first row
-- Test Type: Leave empty or repeat
-- Test Case Name: Leave empty
-- Description: Leave empty
-- Action: Next action step (numbered as "2. ", "3. ", etc.)
-- Expected Result: Next expected result (numbered as "2. ", "3. ", etc.)
-- Test Repository Path: Leave empty
-- Status: Leave empty
-- Components: Leave empty
-- User Story: Leave empty
-- Priority: Leave empty
-- Scenario Type: Leave empty
  
 #### Test Case Structure (Based on Template)
  
 **Required Fields:**
 - **TC ID:** Sequential number (1, 2, 3...)
 - **Test Type:** Manual
-- **Test Case Name:** {Format: TC{ID}_{Scenario name}_{LOB/Module}_{Transaction Type}_{Acceptance Criteria}}
+- **Test Case Name:** {Format: TC{ID}_{Scenario name}_{LOB/Module}
 - **Description:** {Clear description of the objective and what the test case validates}
-- **Action:** {Single action step - one per row}
+- **Test steps:** {Single  step - one per row}
 - **Expected Result:** {Expected result for the corresponding action - one per row}
-- **Test Repository Path:** {Path to test repository}
 - **Status:** Done / In Progress / Not Started
 - **Components:** Middle Market
-- **User Story:** {User Story ID}
+- **User Story:** CCI-101
 - **Priority:** High / Medium / Low
 - **Scenario Type:** Positive / Negative
 **Navigation Requirements:**
-- Only include navigation steps that are explicitly required by the user story scenarios
-- If the user story mentions specific navigation (e.g., "navigate to Claims Overview tab"), include those navigation steps
-- If the user story mentions creating specific data or runs, include those creation steps in the first test case only
-- If the user story is focused on a specific page/feature, navigate directly to that context after login
-- Do not include unnecessary setup steps that are not mentioned in the user story
+### FNOL claim submission workflow
  
+## Initial Setup of sending email
+ 
+### 1. Email setup
+- Send an email from CAZ_Claims_UAT_FNOL <caz.claims.uat.fnol@zurich.com>
+- Verify in COSMOS DB to check for the work item 
+- Validate all fields like email subject,date and time ,policy no ,date of loss
+ 
+ 
+### 2. Creation of work item in FNOL portal
+Verify if work item is created in FNOL portal
+- Person who sent email
+- Urgent flag
+- Asterisk
+- Work item id
+- Subject
+- Date and time
+- Policy no
+- Date of loss
+ 
+## Work item case status To do and assignee as "Unassigned"
+ 
+### 3. Case status as "To do" 
+- Verify the work item id for the email extracted 
+- Validate the work item status and check the assignee of Work item id
+- Work item id status will be "To do" and will be in Unassigned state
+ 
+ 
+ 
+### 4. Validation of "Start a Claim" button and Assign to me dropdown
+- Select the extracted work item id for the email sent
+- Assign the work item id to yourself or others
+- Select the work item id and click on start a claim button
+ 
+### 5. Validation of Policy search screen in FNOL portal
+- Verify the extracted email preview for the email sent
+- Verify if policy number ,loss date and attachments are extracted from email in policy search screen.
+- Verify if user is able to download attachment from the extracted email in the extracted work item. 
+ 
+### 6. General Liability LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a General Liability policy 
+ 
+### 7. Property LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Property policy
+ 
+### 8. Financial Lines LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Financial Lines policy
+
+### 9. Inland Marine LOB
+- Login into FNOL Portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Inland marine policy
+
+### 10. Umbrella LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Umbrella policy
+
+### 11. Contigent Lessor LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Contigent Lessor  policy
+
+### 12. Excess auto LOB
+- Login into FNOL portal
+- Select the work item id ,assign and click on start a claim button
+- Search a Excess Auto  policy
+
 **Setup Requirements:**
-- If the user story requires creating runs or uploading data, include these steps in the first test case
-- For subsequent test cases, reference the existing setup: "Use the Run created in TC1"
+## Initial Setup of sending email
+ 
+### 1. Email setup
+- Send an email from CAZ_Claims_UAT_FNOL <caz.claims.uat.fnol@zurich.com>
+- Verify in COSMOS DB to check for the work item 
+- Validate all fields like email subject,date and time ,policy no ,date of loss
+ 
+ 
+### 2. Creation of work item in FNOL portal
+Verify if work item is created in FNOL portal
+- Person who sent email
+- Urgent flag
+- Asterisk
+- Work item id
+- Subject
+- Date and time
+- Policy no
+- Date of loss
+
  
 #### Validation Requirements
  
 **UI Element Validation:**
-- Validate all UI elements individually as per the user story (cards, textboxes, tables, toggles, buttons, dropdowns, etc.)
-- Each element should have separate Input and Expected Result pairs
-- Example:
-  - Input: Verify the Amount field is displayed
-  - Expected Result: Amount field is visible and enabled for input
-  ---
+Validate as a First Notification of Loss (FNOL) Portal user, I want to view and manage work item cards categorized by their status: unassigned, assigned, processed, and unmatched. These cards should be visually distinct using color coding and appropriate spacing (margins). I want the ability to move assigned cards to the assigned tab and processed cards to the processed tab, making it easy to track and update the status of each work item efficiently.
+
+In-Scope
+
+Work Item Card UI:
+
+
+Design and display cards for work items in four categories: Unassigned, Assigned, Processed, and Unmatched.
+
+Visual color coding for each category (e.g.,light blue for unassigned, dark blue  for assigned, green for processed and so on )
+
+Proper margins and spacing between cards for clarity and readability.
+
+Tabs or Sections:
+
+UI tabs or distinct sections for each status category.
+
+Cards appear under their respective status tab/section.
+
+Status Update:
+
+Updating the card’s status when moved (e.g., from unassigned to assigned).
+
+
+  
  
 ## Output Format: CSV Structure
  
@@ -123,59 +213,35 @@ Generate test cases in CSV format with the following columns:
  
 **CSV Headers:**
 ```
-TC ID,Test Type,Test Case Name,Description,Action,Expected Result,Test Repository Path,Status,Components,User Story,Priority,Scenario Type
+TC ID,Test Type,Test Case Name,Test case Description,Test steps ,Expected Result,Status,Component,User Story,Priority,Scenario Type
 ```
  
 **CSV Format Rules:**
-1. **Each Action-Expected Result pair is a separate row**
+1. **Each Step-Expected Result pair is a separate row**
 2. **First row of each test case** contains:
    - TC ID (e.g., 1, 2, 3)
    - Test Type (Manual)
    - Test Case Name (full descriptive name)
-   - Description (objective of the test case)
-   - Action: First Action step (numbered as "1. ")
+   - Test case Description (objective of the test case)
+   - Test steps: First  step (numbered as "1. ")
    - Expected Result: First Expected Result (numbered as "1. ")
-   - Test Repository Path
    - Status
    - Components (Middle Market)
    - User Story ID
    - Priority
    - Scenario Type
-3. **Subsequent rows for the same test case** contain:
-   - TC ID: Same as first row
-   - Test Type: Empty
-   - Test Case Name: Empty
-   - Description: Empty
-   - Action: Next Action step (numbered as "2. ", "3. ", etc.) - IN THE ACTION COLUMN ONLY
-   - Expected Result: Next Expected Result (numbered as "2. ", "3. ", etc.) - IN THE EXPECTED RESULT COLUMN ONLY
-   - Test Repository Path: Empty
-   - Status: Empty
-   - Components: Empty
-   - User Story ID: Empty
-   - Priority: Empty
-   - Scenario Type: Empty
-4. Escape commas within fields using double quotes
-5. Escape double quotes within fields by doubling them ("")
-6. Number actions sequentially (1., 2., 3., etc.)
-7. Number expected results sequentially (1., 2., 3., etc.)
-8. **CRITICAL:** Keep Action and Expected Result in SEPARATE columns - do NOT combine them
+3. Number actions sequentially (1., 2., 3., etc.)
+4. Number expected results sequentially (1., 2., 3., etc.)
+5. **CRITICAL:** Keep Action and Expected Result in SEPARATE columns - do NOT combine them
 
 #### Scenario Coverage Rules
  
 **Focus on Explicit Requirements:**
 - Focus only on the specific functionality described in each scenario
-- Do not add edge cases, boundary testing, or negative scenarios unless explicitly mentioned in the user story
 - Generate **exactly one test case per scenario** as defined in the user story
 - Invlude postive, Negative scenarios as defined in the user story only
-- Include scope considerations (e.g., Domestic, Produced) 
-- Ensure all transaction types mentioned in the user story are covered:
-  - New Business
-  - Policy Change (Inception, Midterm, Out of Sequence, Preemption)
-  - Renewal
-  - Reinstatement
-  - Rewrite Full Term
-- Genearte atleast 20 to 30 test cases covering all scenarios and transaction types mentioned in the user story
-- Include Pricing & Approval, Quote Process, Binding Process, Policy Issuance in each test case
+- Include in scope considerations  
+- Genearte atleast 20 to 30 test cases covering all scenarios 
 - The number of test cases must match exactly the number of scenarios defined in the user story
  
 **No Duplicate Test Cases:**
@@ -186,25 +252,7 @@ TC ID,Test Type,Test Case Name,Description,Action,Expected Result,Test Repositor
  
 **Example CSV Rows (Multiple rows for one test case):**
 ```csv
-1,Manual,TC01_Verify Contractors Equipment Form ZC 6356 Display_Inland Marine_New Business_R1,The objective of this test case is to validate that the Contractors Equipment form ZC 6356 is displayed with correct version and edition date in the Inland Marine LOB for new business submissions,1. Navigate to Phoenix submission creation screen,1. User should be able to view the submission creation screen with all required fields,Inland Marine/CAMS-1863 Form Display,Done,Middle Market,CAMS-1863,High,Positive
-1,,,,2. Create a Domestic submission with Inland Marine LOB,2. User should be able to create a submission successfully and proceed to line selection,,,,,,
-1,,,,3. Navigate to Inland Marine screen and select Contractors Equipment Coverage,3. User should be able to view the Inland Marine screen with all mandatory fields displayed,,,,,,
-1,,,,4. Verify form ZC 6356 is listed in the coverage options,4. User should verify that form ZC 6356 is available and selectable in the Contractors Equipment coverage options,,,,,,
-1,,,,"5. Verify form edition date is ""03/25""","5. User should verify that the form edition date displays as ""03/25"" (March 2025 edition)",,,,,,
-1,,,,6. Verify form version information is correctly displayed,6. User should verify that form version and edition date are properly displayed with correct metadata,,,,,,
-2,Manual,TC02_Verify Form ZC 6356 Auto-Attachment on Selection_Inland Marine_New Business_R2,The objective of this test case is to validate that the Contractors Equipment form ZC 6356 is automatically attached to the document when user selects the coverage,1. Navigate to Phoenix submission creation screen,1. User should be able to view the submission creation screen,Inland Marine/CAMS-1863 Form Attachment,Done,Middle Market,CAMS-1863,High,Positive
-2,,,,2. Create a Domestic submission with Inland Marine LOB,2. User should be able to create a submission successfully,,,,,,
-2,,,,3. Navigate to Inland Marine screen and select Contractors Equipment Coverage,3. User should be able to view the Inland Marine screen,,,,,,
-2,,,,4. Select form ZC 6356 from coverage options,4. Form ZC 6356 should be automatically added to the documents section,,,,,,
-2,,,,5. Navigate to documents section,5. User should be able to view the documents section with attached forms,,,,,,
-2,,,,6. Verify that form ZC 6356 is attached with latest version,6. User should verify that the attached form is the latest 03/25 edition and not the old version,,,,,,
-2,,,,7. Verify form versioning information,7. User should verify that form metadata displays correct version and edition date information,,,,,,
-3,Manual,TC03_Verify Form ZC 6356 Latest Edition in Payload_Inland Marine_New Business_R1,The objective of this test case is to validate that the latest 03/25 edition form ZC 6356 is sent in the payload to the backend system,1. Navigate to Phoenix submission creation screen,1. User should be able to view the submission creation screen,Inland Marine/CAMS-1863 Form Payload,Done,Middle Market,CAMS-1863,High,Positive
-3,,,,2. Create a Domestic submission with Inland Marine LOB,2. User should be able to create a submission successfully,,,,,,
-3,,,,3. Navigate to Inland Marine screen and select Contractors Equipment Coverage,3. User should be able to view the Inland Marine screen with all fields,,,,,,
-3,,,,4. Select form ZC 6356 from coverage options,4. Form ZC 6356 should be selected,,,,,,
-3,,,,"5. Verify the edition date in system payload is ""03/25""","5. System should send the form with edition date ""03/25"" in the API payload",,,,,,
-3,,,,6. Verify form metadata in payload,6. The payload should include correct form versioning information and metadata,,,,,,
+1,Manual,TC01_All Work Items View - UI,Display all active work item for the logged in user,1. Login into FNOL portal,2. Navigate to the All Work Items section,3.Observe the list of work items displayed on the screen  Middle Market,CCI-101,High,Medium,Low,Positive/Negative
 ```
  
 ---
@@ -220,21 +268,26 @@ TC ID,Test Type,Test Case Name,Description,Action,Expected Result,Test Repositor
  
 **Given User Story:**
 ```
-User Story: As a customer, I want to subscribe to a UT fund by entering my investment details
- 
-Acceptance Criteria:
-1. Minimum investment amount is displayed
-2. Amount validation prevents entry below minimum
-3. Sales charge and tax information is displayed
+This sub-screen contains those work items where no data could be extracted from the email contents and attachments. These work items are categorized with case status = Unmatched. They require manual review by the FNOL team member to determine the necessary course of action of the following:
+
+Assign work item: Assigning the work item indicates that the work item is valid and should undergo human in the loop processing to become a claim. The work item would then appear under the assigned user's Assigned to Me tab
+Terminate the work item: Terminating the work item indicates that the work item should not become a claim (e.g., in the case that an email unrelated to FNOL is received in the inbox). Once terminated, the work item would appear under the Processed tab.
+Merge work item: Merging the work item indicates that the work item is related to an existing work item and the two should be consolidated. The work item would then be categorized/appear under the same tabs as the other work item.
+
+Acceptance Criteria
+
+GIVEN an FNOL Admin or FNOL Team Member signs in to the FNOL portal
+
+WHEN the user navigates to the Unmatched Emails screen
+
+THEN a list of work items appears where Case Status = Unmatched, indicating that GenAI was unable to match any email/attachment contents to the FNOL mandatory fields.Screen elements should align to Figma wireframes
 ```
  
 **Generated CSV Output:**
 ```csv
 TC ID,Test Type,Test Case Name,Description,Action,Expected Result,Test Repository Path,Status,Components,User Story,Priority,Scenario Type
-1,Manual,"TC01_Verify Minimum Investment Display_UT Fund Subscription_New Business_AC1","The objective of this test case is to validate that the minimum investment amount is displayed correctly and retrieved from WIS product management system","1. Navigate to UT fund subscription page","1. User should be able to view the UT fund subscription page with all required fields displayed","UT Fund/STORY-123 Minimum Investment",Done,UT Fund Subscription,STORY-123,High,Positive
-1,,,"2. Verify minimum investment message below amount field","2. User should see ""Min 500 SGD"" message displayed below the amount field",,,,,,
-1,,,"3. Verify source of minimum amount","3. User should verify minimum amount is retrieved from WIS system",,,,,,
-```
+1,Manual,"TC01_All Work Items View - UI,Display all active work item for the logged in user,1. Login into FNOL portal,2. Navigate to the All Work Items section,3.Observe the list of work items displayed on the screen  Middle Market,CCI-101,High,Medium,Low,Positive/Negative
+``
 ---
  
 ## Execution Command
@@ -246,5 +299,4 @@ When ready to generate test cases, the system will:
 4. Save as CSV in the specified location
 5. Display confirmation with file path and test case count
  
-
 ---
